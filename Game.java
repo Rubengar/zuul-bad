@@ -87,8 +87,8 @@ public class Game
         System.out.println("Este es un juego que consiste en escapar,podras consegirlo?");
         System.out.println("Escribe (ayuda) si necesitas ayuda.");
         System.out.println();
-        System.out.println("Estas " + currentRoom.getDescription());
-        System.out.print("Salidas: ");
+        System.out.println("Estas " +currentRoom.getDescription());
+        System.out.print("Salidas: " +currentRoom.getExitString());
         printLocalInfo();
     }
 
@@ -150,25 +150,11 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        if(direction.equals("norte")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("este")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("sur")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("oeste")) {
-            nextRoom = currentRoom.westExit;
-        }
-        if(direction.equals("suroeste")) {
-            nextRoom = currentRoom.southEastExit;
-        }
+       Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            System.out.println("Si puedes atravesar la parez.., adelante");
+
+        if(nextRoom == null) {
+            System.out.println("Si puedes atravesar la pared.., adelante");
         }
         else {
             currentRoom = nextRoom;
@@ -196,21 +182,6 @@ public class Game
 
     private void printLocalInfo()
     {
-        if(currentRoom.northExit != null) {
-            System.out.print("norte ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("este ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("sur ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("oeste ");
-        }
-        if(currentRoom.southEastExit != null) {
-            System.out.print("suroeste ");
-        }
-        System.out.println();
+       currentRoom.getExitString();
     }
 }
