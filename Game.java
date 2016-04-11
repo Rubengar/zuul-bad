@@ -47,14 +47,14 @@ public class Game
         salida = new Room("la salida!!!, lo has consegido , eres libre, corre y no mires atras");
 
         // initialise room exits
-        celda.setExits(pasillo, null, null, null);
-        otraCelda.setExits(null, null, pasillo, null);
-        pasillo.setExits(otraCelda, comedor, celda, null);
-        comedor.setExits(patio, gimnasio, null, pasillo);
-        gimnasio.setExits(null, null, null, comedor);
-        patio.setExits(null, entrada, comedor, null);
-        entrada.setExits(null, salida, null, patio);
-        salida.setExits(null, null, null, entrada);
+        celda.setExits(pasillo, null, null, null, null);
+        otraCelda.setExits(null, null, pasillo, null,null);
+        pasillo.setExits(otraCelda, comedor, celda, null,null);
+        comedor.setExits(patio, gimnasio, null, pasillo, gimnasio);
+        gimnasio.setExits(null, null, null, comedor, null);
+        patio.setExits(null, entrada, comedor, null, null);
+        entrada.setExits(null, salida, null, patio, null);
+        salida.setExits(null, null, null, entrada, null);
 
         currentRoom = celda;  // start game outside
     }
@@ -163,6 +163,9 @@ public class Game
         if(direction.equals("oeste")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("suroeste")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
             System.out.println("Si puedes atravesar la parez.., adelante");
@@ -204,6 +207,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("oeste ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("suroeste ");
         }
         System.out.println();
     }
