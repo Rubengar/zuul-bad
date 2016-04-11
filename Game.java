@@ -50,9 +50,9 @@ public class Game
         celda.setExits(pasillo, null, null, null, null);
         otraCelda.setExits(null, null, pasillo, null,null);
         pasillo.setExits(otraCelda, comedor, celda, null,null);
-        comedor.setExits(patio, gimnasio, null, pasillo, gimnasio);
+        comedor.setExits(patio, gimnasio, null, pasillo, null);
         gimnasio.setExits(null, null, null, comedor, null);
-        patio.setExits(null, entrada, comedor, null, null);
+        patio.setExits(null, entrada, comedor, null, gimnasio);
         entrada.setExits(null, salida, null, patio, null);
         salida.setExits(null, null, null, entrada, null);
 
