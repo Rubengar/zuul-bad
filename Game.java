@@ -47,14 +47,14 @@ public class Game
         salida = new Room("la salida!!!, lo has consegido , eres libre, corre y no mires atras");
 
         // initialise room exits
-        celda.setExits(pasillo, null, null, null, null);
-        otraCelda.setExits(null, null, pasillo, null,null);
-        pasillo.setExits(otraCelda, comedor, celda, null,null);
-        comedor.setExits(patio, gimnasio, null, pasillo, null);
-        gimnasio.setExits(null, null, null, comedor, null);
-        patio.setExits(null, entrada, comedor, null, gimnasio);
-        entrada.setExits(null, salida, null, patio, null);
-        salida.setExits(null, null, null, entrada, null);
+        celda.setExits(pasillo, null, null, null, null,null);
+        otraCelda.setExits(null, null, pasillo, null,comedor,null);
+        pasillo.setExits(otraCelda, comedor, celda, null,null,null);
+        comedor.setExits(patio, gimnasio, null, pasillo, null,otraCelda);
+        gimnasio.setExits(null, null, null, comedor, null,patio);
+        patio.setExits(null, entrada, comedor, null, gimnasio,null);
+        entrada.setExits(null, salida, null, patio, null,null);
+        salida.setExits(null, null, null, entrada, null,null);
 
         currentRoom = celda;  // start game outside
     }
@@ -87,8 +87,6 @@ public class Game
         System.out.println("Este es un juego que consiste en escapar,podras consegirlo?");
         System.out.println("Escribe (ayuda) si necesitas ayuda.");
         System.out.println();
-        System.out.println("Estas " +currentRoom.getDescription());
-        System.out.print("Salidas: " +currentRoom.getExitString());
         printLocalInfo();
     }
 
