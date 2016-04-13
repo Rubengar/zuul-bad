@@ -187,6 +187,6 @@ public class Game
 
     private void printLocalInfo()
     {
-        System.out.println(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
     }
 }

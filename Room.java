@@ -37,7 +37,7 @@ public class Room
      */
     public void setExits(String direction, Room neighbor) 
     {
-            salidas.put(direction,neighbor);
+        salidas.put(direction,neighbor);
     }
 
     /**
@@ -80,8 +80,7 @@ public class Room
      */
     public String getExitString()
     {
-        String descripcion = "Estas " + getDescription()+"\n";
-        descripcion += " Salidas: ";
+        String descripcion = " Salidas: ";
         if(getExit("norte") != null) {
             descripcion +="norte ";
         }
@@ -100,6 +99,18 @@ public class Room
         if(getExit("noroeste") != null) {
             descripcion +="noroeste ";
         }
+        return descripcion;
+    }
+    /**
+     * Return a long description of this room, of the form:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+        String descripcion = ("Estas " + getDescription()+"\n");    
+        descripcion += getExitString();
         return descripcion;
     }
 }
