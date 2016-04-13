@@ -47,14 +47,24 @@ public class Game
         salida = new Room("la salida!!!, lo has consegido , eres libre, corre y no mires atras");
 
         // initialise room exits
-        celda.setExits(pasillo, null, null, null, null,null);
-        otraCelda.setExits(null, null, pasillo, null,comedor,null);
-        pasillo.setExits(otraCelda, comedor, celda, null,null,null);
-        comedor.setExits(patio, gimnasio, null, pasillo, null,otraCelda);
-        gimnasio.setExits(null, null, null, comedor, null,patio);
-        patio.setExits(null, entrada, comedor, null, gimnasio,null);
-        entrada.setExits(null, salida, null, patio, null,null);
-        salida.setExits(null, null, null, entrada, null,null);
+        celda.setExits("norte",pasillo);
+        otraCelda.setExits("sur",pasillo);
+        otraCelda.setExits("sureste",comedor);
+        pasillo.setExits("norte",otraCelda);
+        pasillo.setExits("sur",celda);
+        pasillo.setExits("este",comedor);
+        comedor.setExits("norte",patio);
+        comedor.setExits("este",gimnasio);
+        comedor.setExits("noroeste",otraCelda);
+        comedor.setExits("oeste",pasillo);
+        gimnasio.setExits("oeste",comedor);
+        gimnasio.setExits("noroeste",patio);
+        patio.setExits("este",entrada);
+        patio.setExits("sureste",gimnasio);
+        patio.setExits("sur",comedor);
+        entrada.setExits("este",salida);
+        entrada.setExits("oeste",patio);
+        salida.setExits("oeste",entrada);
 
         currentRoom = celda;  // start game outside
     }
