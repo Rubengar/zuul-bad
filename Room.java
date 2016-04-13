@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -40,7 +41,7 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room norte, Room este, Room sur, Room oeste,Room suroeste) 
+    public void setExits(Room norte, Room este, Room sur, Room oeste,Room sureste) 
     {
         if(norte != null)
             northExit = norte;
@@ -50,8 +51,8 @@ public class Room
             southExit = sur;
         if(oeste != null)
             westExit = oeste;
-        if(suroeste != null)
-            southEastExit = suroeste;
+        if(sureste != null)
+            southEastExit = sureste;
     }
 
     /**
@@ -91,22 +92,23 @@ public class Room
      */
     public String getExitString()
     {
-       String salidas = null;
-       if(northExit != null){
-           salidas ="norte "; 
-        }                            
-       if(eastExit != null) {
-            salidas += "este ";
+        String descripcion = "Estas " + getDescription();
+        descripcion += " Salidas: ";
+        if(getExit("norte") != null) {
+            descripcion +="norte ";
         }
-       if(southExit != null) {
-            salidas += "sur ";
+        if(getExit("este") != null) {
+           descripcion +="este ";
         }
-       if(westExit != null) {
-            salidas += "oeste ";         
+        if(getExit("sur") != null) {
+            descripcion +="sur ";
         }
-       if(southEastExit != null) {
-            salidas += "suroeste ";
-       }
-       return salidas;
+        if(getExit("oeste") != null) {
+            descripcion +="oeste ";
+        }
+        if(getExit("sureste") != null) {
+            descripcion +="sureste ";
+        }
+        return descripcion;
     }
 }

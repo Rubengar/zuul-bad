@@ -150,16 +150,13 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-       Room nextRoom = currentRoom.getExit(direction);
-
+        Room nextRoom = currentRoom.getExit(direction);
 
         if(nextRoom == null) {
             System.out.println("Si puedes atravesar la pared.., adelante");
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("Estas " + currentRoom.getDescription());
-            System.out.print("Salidas: ");
             printLocalInfo();
         }
     }
@@ -182,6 +179,6 @@ public class Game
 
     private void printLocalInfo()
     {
-       currentRoom.getExitString();
+        System.out.println(currentRoom.getExitString());
     }
 }
