@@ -37,7 +37,7 @@ public class Game
         Room celda, pasillo, otraCelda, comedor, gimnasio, patio, entrada, salida;
 
         // create the rooms
-        celda = new Room("en tu celda");
+        celda = new Room("en tu celda","lija",1);
         otraCelda = new Room("en otra celda, vaya escapista que esta hecho");
         comedor = new Room("en el comedor,no te pares a tomar algo que te conozco");
         pasillo = new Room("en el pasillo, muy bien!!! vamos avanzando");
@@ -127,6 +127,7 @@ public class Game
         else if (commandWord.equals("look")) 
         {
             System.out.println(currentRoom.getLongDescription());
+            currentRoom.infObjecto();
         }
         else if (commandWord.equals("eat"))
         {
