@@ -128,7 +128,6 @@ public class Game
         {
             System.out.println(currentRoom.getLongDescription());
         }
-
         return wantToQuit;
     }
 
@@ -143,8 +142,8 @@ public class Game
     {
         System.out.println("Estas en una carcel y tienes que escapar");
         System.out.println();
-        System.out.println("los comandos que puesdes usar son:");
-        System.out.println("   al(norte,sur,este,oeste), salir, ayuda");
+
+        parser.getCommandWord().showAll();
     }
 
     /** 
