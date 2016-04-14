@@ -142,8 +142,7 @@ public class Game
     {
         System.out.println("Estas en una carcel y tienes que escapar");
         System.out.println();
-
-        parser.getCommandWord().showAll();
+        parser.showCommands();
     }
 
     /** 
