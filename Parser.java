@@ -62,12 +62,9 @@ public class Parser
             return new Command(null, word2); 
         }
     }
-    
-    public CommandWords getCommandWord()
-    {
-        return commands;
-    }
-    
+    /**
+     * Metodo que muestra por pantalla los comandos disponibles
+     */
     public void showCommands()
     {
         commands.showAll();
