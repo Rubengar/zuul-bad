@@ -37,7 +37,7 @@ public class Game
         Room celda, pasillo, otraCelda, comedor, gimnasio, patio, entrada, salida;
 
         // create the rooms
-        celda = new Room("en tu celda","lija",1);
+        celda = new Room("en tu celda");
         otraCelda = new Room("en otra celda, vaya escapista que esta hecho");
         comedor = new Room("en el comedor,no te pares a tomar algo que te conozco");
         pasillo = new Room("en el pasillo, muy bien!!! vamos avanzando");
@@ -65,7 +65,8 @@ public class Game
         entrada.setExits("este",salida);
         entrada.setExits("oeste",patio);
         salida.setExits("oeste",entrada);
-
+        celda.addItem("Mesa",12F);
+        celda.addItem("Cama",12F);
         currentRoom = celda;  // start game outside
     }
 

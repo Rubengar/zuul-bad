@@ -17,8 +17,8 @@ public class Room
 {
     private String description;
     private HashMap<String,Room> salidas;
-    private String descripcionObjeto;
-    private float peso;
+    private ArrayList<Item> objetos;
+    private Item item;
     
 
     /**
@@ -31,22 +31,8 @@ public class Room
     {
         this.description = description;
         salidas = new HashMap<>();
-        descripcionObjeto = descripcionObjeto;
+        objetos = new ArrayList<>();
     }
-    /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
-     * @param description The room's description.
-     */
-    public Room(String description,String descripcionObjeto,float peso) 
-    {
-        this.description = description;
-        salidas = new HashMap<>();
-        this.descripcionObjeto = descripcionObjeto;
-        this.peso = peso;
-    }
-
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
@@ -132,13 +118,22 @@ public class Room
     }
     public void infObjecto()
     {
-        if (descripcionObjeto != null)
+        if (!objetos.isEmpty())
         {
-            System.out.println("Objetos: "+descripcionObjeto+ " Peso: "+peso+"Kg");        
+            System.out.println("objetos disponibles");
+            for (Item item : objetos)
+            {
+                System.out.println(item.getDescripcion()+ " Peso: "+item.getPeso()+"Kg");
+            }       
         }
         else
         {
             System.out.println("No hay objetos en esta habitacion");
         }
+    }
+    public void addItem(String descripcion,float peso)
+    {
+        objetos.add(item = new Item(descripcion,peso));
+    
     }
 }
