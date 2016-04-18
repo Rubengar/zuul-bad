@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-
+    private Room previousRoom;
     /**
      * Create the game and initialise its internal map.
      */
@@ -47,24 +47,24 @@ public class Game
         salida = new Room("la salida!!!, lo has consegido , eres libre, corre y no mires atras");
 
         // initialise room exits
-        celda.setExits("norte",pasillo);
-        otraCelda.setExits("sur",pasillo);
-        otraCelda.setExits("sureste",comedor);
-        pasillo.setExits("norte",otraCelda);
-        pasillo.setExits("sur",celda);
-        pasillo.setExits("este",comedor);
-        comedor.setExits("norte",patio);
-        comedor.setExits("este",gimnasio);
-        comedor.setExits("noroeste",otraCelda);
-        comedor.setExits("oeste",pasillo);
-        gimnasio.setExits("oeste",comedor);
-        gimnasio.setExits("noroeste",patio);
-        patio.setExits("este",entrada);
-        patio.setExits("sureste",gimnasio);
-        patio.setExits("sur",comedor);
-        entrada.setExits("este",salida);
-        entrada.setExits("oeste",patio);
-        salida.setExits("oeste",entrada);
+        celda.setExit("norte",pasillo);
+        otraCelda.setExit("sur",pasillo);
+        otraCelda.setExit("sureste",comedor);
+        pasillo.setExit("norte",otraCelda);
+        pasillo.setExit("sur",celda);
+        pasillo.setExit("este",comedor);
+        comedor.setExit("norte",patio);
+        comedor.setExit("este",gimnasio);
+        comedor.setExit("noroeste",otraCelda);
+        comedor.setExit("oeste",pasillo);
+        gimnasio.setExit("oeste",comedor);
+        gimnasio.setExit("noroeste",patio);
+        patio.setExit("este",entrada);
+        patio.setExit("sureste",gimnasio);
+        patio.setExit("sur",comedor);
+        entrada.setExit("este",salida);
+        entrada.setExit("oeste",patio);
+        salida.setExit("oeste",entrada);
         celda.addItem("Mesa",12F);
         celda.addItem("Cama",12F);
         currentRoom = celda;  // start game outside
@@ -128,11 +128,24 @@ public class Game
         else if (commandWord.equals("look")) 
         {
             System.out.println(currentRoom.getLongDescription());
-            currentRoom.infObjecto();
         }
         else if (commandWord.equals("eat"))
         {
             System.out.println("You have eaten now and you are not hungry any more");
+        }
+        else if(commandWord.equals("back"))
+        {
+            int limite = 0;
+            if (previousRoom != null && limite != 2)
+            {
+                currentRoom = previousRoom;
+                System.out.println(currentRoom.getLongDescription());
+                limite++;
+            }else
+            {
+                System.out.println("Error no puedes volver atras");
+            }
+
         }
         return wantToQuit;
     }
@@ -172,6 +185,7 @@ public class Game
             System.out.println("Si puedes atravesar la pared.., adelante");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             printLocalInfo();
         }

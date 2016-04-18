@@ -19,7 +19,6 @@ public class Room
     private HashMap<String,Room> salidas;
     private ArrayList<Item> objetos;
     private Item item;
-    
 
     /**
      * Create a room described "description". Initially, it has
@@ -33,12 +32,13 @@ public class Room
         salidas = new HashMap<>();
         objetos = new ArrayList<>();
     }
+
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
      * @param neighbor The room in the given direction.
      */
-    public void setExits(String direction, Room neighbor) 
+    public void setExit(String direction, Room neighbor) 
     {
         salidas.put(direction,neighbor);
     }
@@ -53,26 +53,7 @@ public class Room
 
     public Room getExit(String direccion)
     {
-        Room habitacion = null;
-        if(direccion.equals("norte")) {
-            habitacion = salidas.get("norte");
-        }
-        if(direccion.equals("este")) {
-            habitacion = salidas.get("este");
-        }
-        if(direccion.equals("sur")) {
-            habitacion = salidas.get("sur");
-        }
-        if(direccion.equals("oeste")) {
-            habitacion = salidas.get("oeste");
-        }
-        if(direccion.equals("sureste")) {
-            habitacion = salidas.get("sureste");
-        }
-        if(direccion.equals("noroeste")) {
-            habitacion = salidas.get("noroeste");
-        }
-        return habitacion;  
+        return salidas.get(direccion);
     }
 
     /**
@@ -84,26 +65,14 @@ public class Room
     public String getExitString()
     {
         String descripcion = " Salidas: ";
-        if(getExit("norte") != null) {
-            descripcion +="norte ";
-        }
-        if(getExit("este") != null) {
-            descripcion +="este ";
-        }
-        if(getExit("sur") != null) {
-            descripcion +="sur ";
-        }
-        if(getExit("oeste") != null) {
-            descripcion +="oeste ";
-        }
-        if(getExit("sureste") != null) {
-            descripcion +="sureste ";
-        }
-        if(getExit("noroeste") != null) {
-            descripcion +="noroeste ";
+        Iterator it = salidas.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry)it.next();
+            descripcion += (e.getKey() + " ");
         }
         return descripcion;
     }
+
     /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
@@ -113,27 +82,28 @@ public class Room
     public String getLongDescription()
     {
         String descripcion = ("Estas " + getDescription()+"\n");    
-        descripcion += getExitString();
-        return descripcion;
-    }
-    public void infObjecto()
-    {
+        descripcion += getExitString()+"\n";        
         if (!objetos.isEmpty())
         {
-            System.out.println("objetos disponibles");
+            descripcion+= ("objetos disponibles"+"\n");
             for (Item item : objetos)
             {
-                System.out.println(item.getDescripcion()+ " Peso: "+item.getPeso()+"Kg");
+                descripcion += (item.getDescripcion()+ " Peso: "+item.getPeso()+"Kg"+"\n");
             }       
         }
         else
         {
-            System.out.println("No hay objetos en esta habitacion");
+            descripcion += ("No hay objetos en esta habitacion");
         }
+        return descripcion;
     }
+
+    /**
+     * Permite añadir un objeto a la habitación
+     */
     public void addItem(String descripcion,float peso)
     {
         objetos.add(item = new Item(descripcion,peso));
-    
+
     }
 }
