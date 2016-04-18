@@ -135,17 +135,14 @@ public class Game
         }
         else if(commandWord.equals("back"))
         {
-            int limite = 0;
-            if (previousRoom != null && limite != 2)
+            if (previousRoom == null || previousRoom == currentRoom)
+            {
+                System.out.println("Error no puedes volver atras");
+            }else
             {
                 currentRoom = previousRoom;
                 System.out.println(currentRoom.getLongDescription());
-                limite++;
-            }else
-            {
-                System.out.println("Error no puedes volver atras");
             }
-
         }
         return wantToQuit;
     }
