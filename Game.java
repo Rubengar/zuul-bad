@@ -215,7 +215,7 @@ public class Game
         }else
         {
             currentRoom.removeItem(jugador.takeItem(currentRoom.getItems(command.getSecondWord())));
-            System.out.println("Cojiste:" +jugador.takeItem(currentRoom.getItems(command.getSecondWord())));
+            System.out.println("Cogiste " + command.getSecondWord()) ;
         }
     }
     /**
@@ -235,7 +235,7 @@ public class Game
         }else
         {
             jugador.getPlayerRoom().addItems(jugador.dropItem(jugador.getItem(command.getSecondWord())));
-            System.out.println("Dejaste:" +jugador.getItem(command.getSecondWord()));
+            System.out.println("Dejaste "+ command.getSecondWord());
         }
     }
 
