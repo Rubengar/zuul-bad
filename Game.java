@@ -20,8 +20,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room previousRoom;
     private Stack<Room> lista;
+    private Player jugador;
     /**
      * Create the game and initialise its internal map.
      */
@@ -70,7 +70,9 @@ public class Game
         salida.setExit("oeste",entrada);
         celda.addItem("Mesa",12F);
         celda.addItem("Cama",12F);
+        
         currentRoom = celda;  // start game outside
+        jugador = new Player(currentRoom);
     }
 
     /**
@@ -140,6 +142,18 @@ public class Game
         {
             returnRoom();
         }
+        else if (commandWord.equals("take"))
+        {
+            takeItem(command);
+        }
+        else if (commandWord.equals("drop"))
+        {
+            dropItem(command);
+        }
+         else if (commandWord.equals("items"))
+        {
+            jugador.infoItems();
+        }
         return wantToQuit;
     }
 
@@ -178,25 +192,67 @@ public class Game
             System.out.println("Si puedes atravesar la pared.., adelante");
         }
         else {
-            previousRoom = currentRoom;
             lista.push(currentRoom);
             currentRoom = nextRoom;
+            jugador.movePlayer(currentRoom);
             printLocalInfo();
         }
     }
+    /**
+     * Metodo que añade el item al jugador y lo elimina de la habitacion
+     */
+    private void takeItem(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Coger que?");
+            return;
+        }
+        if (currentRoom.getItems(command.getSecondWord())==null)
+        {
+            System.out.println("No existe ese objeto");
+            return;
+        }else
+        {
+            currentRoom.removeItem(jugador.takeItem(currentRoom.getItems(command.getSecondWord())));
+            System.out.println("Cojiste:" +jugador.takeItem(currentRoom.getItems(command.getSecondWord())));
+        }
+    }
+    /**
+     * Metodo que añade el item al la habitacion  y lo elimina de jugador
+     */
+    private void dropItem(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Dejar que?");
+            return;
+        }
+        if (jugador.getItem(command.getSecondWord())==null)
+        {
+            System.out.println("No existe ese objeto");
+            return;
+        }else
+        {
+            jugador.getPlayerRoom().addItems(jugador.dropItem(jugador.getItem(command.getSecondWord())));
+            System.out.println("Dejaste:" +jugador.getItem(command.getSecondWord()));
+        }
+    }
+
     /**
      * Metodo que muestra por pantalla la informacion de la habitacion anterior.
      */
     private void returnRoom()
     {
         if (lista.isEmpty())
-            {
-                System.out.println("Error no puedes volver atras");
-            }else
-            {
-                currentRoom = lista.pop();
-                System.out.println(currentRoom.getLongDescription());
-            }
+        {
+            System.out.println("Error no puedes volver atras");
+        }else
+        {
+            currentRoom = lista.pop();
+            jugador.movePlayer(currentRoom);
+            System.out.println(currentRoom.getLongDescription());
+        }
     }
 
     /** 
