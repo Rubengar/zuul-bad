@@ -9,7 +9,7 @@ public class Item
 {
     // instance variables - replace the example below with your own
     private float peso;
-    
+
     private String descripcion;
 
     /**
@@ -17,9 +17,10 @@ public class Item
      */
     public Item(String descripcion , float peso)
     {
-       this.descripcion = descripcion;
-       this.peso = peso;
+        this.descripcion = descripcion;
+        this.peso = peso;
     }
+
     /**
      * Metodo que te devuelve la descripcion del objeto
      */
@@ -27,11 +28,19 @@ public class Item
     {
         return descripcion;
     }
+
     /**
      * Devuelve el peso del objeto
      */
     public float getPeso()
     {
         return peso;
+    }
+    /**
+     * Devuelve la informacion del objeto
+     */
+    public String toString()
+    {
+        return descripcion + "Peso: " + peso+ "kg\n";
     }
 }

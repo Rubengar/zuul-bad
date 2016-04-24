@@ -50,7 +50,9 @@ public class Room
     {
         return description;
     }
-
+    /**
+     * Devuelve la habitacion segun la direccion.
+     */
     public Room getExit(String direccion)
     {
         return salidas.get(direccion);
@@ -105,5 +107,33 @@ public class Room
     {
         objetos.add(item = new Item(descripcion,peso));
 
+    }    
+    /**
+     * Añade  un objeto pasado por parametro
+     */
+    public void addItems(Item item)
+    {
+         objetos.add(item);
+    }
+    /**
+     * Elimina un objeto de la habitacion
+     */
+    public void removeItem(Item item)
+    {
+        objetos.remove(item);
+    }
+    /**
+     * Metodo que busca un objeto por la descripcion y lo devuelve
+     */
+    public Item getItems(String descripcion)
+    {
+        for (Item item : objetos)
+        {
+            if (item.getDescripcion().equals(descripcion))
+            {
+                return item;
+            }
+        }
+        return null;
     }
 }
