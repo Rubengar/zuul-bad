@@ -218,7 +218,7 @@ public class Game
             System.out.println("Cogiste " + command.getSecondWord()) ;
         }
     }
-    /**
+    /** 
      * Metodo que añade el item al la habitacion  y lo elimina de jugador
      */
     private void dropItem(Command command)
