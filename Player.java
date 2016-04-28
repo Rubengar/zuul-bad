@@ -10,7 +10,7 @@ public class Player
     // instance variables - replace the example below with your own
     private ArrayList<Item> objetos;
 
-    private  static final float PESO_MAXIMO = 50f;;
+    private  static final float PESO_MAXIMO = 20f;;
 
     private float pesoTotal;
 

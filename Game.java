@@ -70,7 +70,7 @@ public class Game
         salida.setExit("oeste",entrada);
         celda.addItem("Mesa",12F);
         celda.addItem("Cama",12F);
-        
+
         currentRoom = celda;  // start game outside
         jugador = new Player(currentRoom);
     }
@@ -121,38 +121,34 @@ public class Game
         }
 
         Option commandWord = command.getCommandWord();
-        if (commandWord.equals(Option.AYUDA)) {
-            printHelp();
-        }
-        else if (commandWord.equals(Option.AL)) {
-            goRoom(command);
-        }
-        else if (commandWord.equals(Option.SALIR)) {
-            wantToQuit = quit(command);
-        }
-        else if (commandWord.equals(Option.LOOK)) 
-        {
-            System.out.println(currentRoom.getLongDescription());
-        }
-        else if (commandWord.equals(Option.EAT))
-        {
-            System.out.println("You have eaten now and you are not hungry any more");
-        }
-        else if(commandWord.equals(Option.BACK))
-        {
-            returnRoom();
-        }
-        else if (commandWord.equals(Option.TAKE))
-        {
-            takeItem(command);
-        }
-        else if (commandWord.equals(Option.DROP))
-        {
-            dropItem(command);
-        }
-         else if (commandWord.equals(Option.ITEMS))
-        {
-            jugador.infoItems();
+        switch (commandWord) {
+            case AYUDA:
+                printHelp();
+                break;
+            case AL:
+                goRoom(command);
+                break;
+            case SALIR:
+                wantToQuit = quit(command);
+                break;
+            case LOOK:
+                System.out.println(currentRoom.getLongDescription());
+                break;
+            case EAT:
+                System.out.println("You have eaten now and you are not hungry any more");
+                break;
+            case BACK:;
+                returnRoom();
+                break;
+            case TAKE:
+                takeItem(command);
+                break;
+            case DROP:
+                dropItem(command);
+                break;
+            case ITEMS:
+                jugador.infoItems();
+                break;
         }
         return wantToQuit;
     }
@@ -198,6 +194,7 @@ public class Game
             printLocalInfo();
         }
     }
+
     /**
      * Metodo que añade el item al jugador y lo elimina de la habitacion
      */
@@ -218,6 +215,7 @@ public class Game
             System.out.println("Cogiste " + command.getSecondWord()) ;
         }
     }
+
     /** 
      * Metodo que añade el item al la habitacion  y lo elimina de jugador
      */
