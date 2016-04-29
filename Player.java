@@ -126,7 +126,7 @@ public class Player
     /**
      * Devuelve true si esta vacio el Stack
      */
-    public boolean isEmpty()
+    public boolean puedeVolver()
     {
      return habitaciones.isEmpty();
     }

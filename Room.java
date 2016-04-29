@@ -123,7 +123,7 @@ public class Room
         {
             if (item.getDescripcion().equals(descripcion))
             {
-                return item;
+                objeto = item;
             }
         }
         return objeto;

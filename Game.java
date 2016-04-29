@@ -200,13 +200,20 @@ public class Game
             System.out.println("Coger que?");
             return;
         }
-        if (!jugador.getPlayerRoom().getItems(command.getSecondWord()).disponible())
+        Item item = jugador.getPlayerRoom().getItems(command.getSecondWord());
+        if (item == null)
         {
-            System.out.println("No existe ese objeto ,o no lo puedes coger");
+            System.out.println("No existe ese objeto");
             return;
-        }else
+        }
+        else if (!item.disponible())
         {
-            jugador.getPlayerRoom().removeItem(jugador.takeItem(jugador.getPlayerRoom().getItems(command.getSecondWord())));
+            System.out.println("No puedes coger ese objeto");
+            return;
+        }
+        else
+        {
+            jugador.getPlayerRoom().removeItem(jugador.takeItem(item));
             System.out.println("Cogiste " + command.getSecondWord()) ;
         }
     }
@@ -221,13 +228,14 @@ public class Game
             System.out.println("Dejar que?");
             return;
         }
-        if (jugador.getItem(command.getSecondWord())==null)
+        Item item = jugador.getItem(command.getSecondWord());
+        if (item ==null)
         {
             System.out.println("No existe ese objeto");
             return;
         }else
         {
-            jugador.getPlayerRoom().addItem(jugador.dropItem(jugador.getItem(command.getSecondWord())));
+            jugador.getPlayerRoom().addItem(jugador.dropItem(item));
             System.out.println("Dejaste "+ command.getSecondWord());
         }
     }
