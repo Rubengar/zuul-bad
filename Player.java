@@ -15,6 +15,8 @@ public class Player
     private float pesoTotal;
 
     private Room habitacion;
+    
+    public Stack <Room> lista;
 
     /**
      * Constructor for objects of class Player
@@ -23,6 +25,7 @@ public class Player
     {
         this.habitacion = habitacion;
         pesoTotal = 0F;
+        lista = new Stack<>();
         objetos = new ArrayList<>();
     }
 

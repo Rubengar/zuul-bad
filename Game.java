@@ -19,8 +19,6 @@ import java.util.*;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> lista;
     private Player jugador;
     /**
      * Create the game and initialise its internal map.
@@ -29,7 +27,6 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        lista = new Stack<>();
     }
 
     /**
@@ -71,8 +68,7 @@ public class Game
         celda.addItem("Mesa",12F);
         celda.addItem("Cama",12F);
 
-        currentRoom = celda;  // start game outside
-        jugador = new Player(currentRoom);
+        jugador = new Player(celda);
     }
 
     /**
@@ -132,7 +128,7 @@ public class Game
                 wantToQuit = quit(command);
                 break;
             case LOOK:
-                System.out.println(currentRoom.getLongDescription());
+                System.out.println(jugador.getPlayerRoom().getLongDescription());
                 break;
             case EAT:
                 System.out.println("You have eaten now and you are not hungry any more");
@@ -182,15 +178,14 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = jugador.getPlayerRoom().getExit(direction);
 
         if(nextRoom == null) {
             System.out.println("Si puedes atravesar la pared.., adelante");
         }
         else {
-            lista.push(currentRoom);
-            currentRoom = nextRoom;
-            jugador.movePlayer(currentRoom);
+            jugador.lista.push(jugador.getPlayerRoom());
+            jugador.movePlayer(nextRoom);
             printLocalInfo();
         }
     }
@@ -205,13 +200,13 @@ public class Game
             System.out.println("Coger que?");
             return;
         }
-        if (currentRoom.getItems(command.getSecondWord())==null)
+        if (jugador.getPlayerRoom().getItems(command.getSecondWord())==null)
         {
             System.out.println("No existe ese objeto");
             return;
         }else
         {
-            currentRoom.removeItem(jugador.takeItem(currentRoom.getItems(command.getSecondWord())));
+            jugador.getPlayerRoom().removeItem(jugador.takeItem(jugador.getPlayerRoom().getItems(command.getSecondWord())));
             System.out.println("Cogiste " + command.getSecondWord()) ;
         }
     }
@@ -242,14 +237,14 @@ public class Game
      */
     private void returnRoom()
     {
-        if (lista.isEmpty())
+        if (jugador.lista.isEmpty())
         {
             System.out.println("Error no puedes volver atras");
         }else
         {
-            currentRoom = lista.pop();
-            jugador.movePlayer(currentRoom);
-            System.out.println(currentRoom.getLongDescription());
+            Room room = jugador.lista.pop();
+            jugador.movePlayer(room);
+            System.out.println(jugador.getPlayerRoom().getLongDescription());
         }
     }
 
@@ -271,6 +266,6 @@ public class Game
 
     private void printLocalInfo()
     {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(jugador.getPlayerRoom().getLongDescription());
     }
 }
