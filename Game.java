@@ -97,7 +97,7 @@ public class Game
         System.out.println();
         System.out.println("Bienvenidos a la carcel");
         System.out.println("Este es un juego que consiste en escapar,podras consegirlo?");
-        System.out.println("Escribe (ayuda) si necesitas ayuda.");
+        System.out.println("Escribe ("+Option.AYUDA.getComando()+") si necesitas ayuda.");
         System.out.println();
         printLocalInfo();
     }
