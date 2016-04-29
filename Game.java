@@ -65,8 +65,8 @@ public class Game
         entrada.setExit("este",salida);
         entrada.setExit("oeste",patio);
         salida.setExit("oeste",entrada);
-        celda.addItem("Mesa",12F);
-        celda.addItem("Cama",12F);
+        celda.addItem(new Item ("Mesa",12F,true));
+        celda.addItem(new Item("Cama",12F,false));
 
         jugador = new Player(celda);
     }
@@ -184,7 +184,7 @@ public class Game
             System.out.println("Si puedes atravesar la pared.., adelante");
         }
         else {
-            jugador.lista.push(jugador.getPlayerRoom());
+            jugador.addRoom(jugador.getPlayerRoom());
             jugador.movePlayer(nextRoom);
             printLocalInfo();
         }
@@ -200,9 +200,9 @@ public class Game
             System.out.println("Coger que?");
             return;
         }
-        if (jugador.getPlayerRoom().getItems(command.getSecondWord())==null)
+        if (!jugador.getPlayerRoom().getItems(command.getSecondWord()).disponible())
         {
-            System.out.println("No existe ese objeto");
+            System.out.println("No existe ese objeto ,o no lo puedes coger");
             return;
         }else
         {
@@ -227,7 +227,7 @@ public class Game
             return;
         }else
         {
-            jugador.getPlayerRoom().addItems(jugador.dropItem(jugador.getItem(command.getSecondWord())));
+            jugador.getPlayerRoom().addItem(jugador.dropItem(jugador.getItem(command.getSecondWord())));
             System.out.println("Dejaste "+ command.getSecondWord());
         }
     }
@@ -237,12 +237,12 @@ public class Game
      */
     private void returnRoom()
     {
-        if (jugador.lista.isEmpty())
+        if (jugador.isEmpty())
         {
             System.out.println("Error no puedes volver atras");
         }else
         {
-            Room room = jugador.lista.pop();
+            Room room = jugador.removeRoom();
             jugador.movePlayer(room);
             System.out.println(jugador.getPlayerRoom().getLongDescription());
         }

@@ -11,13 +11,16 @@ public class Item
     private float peso;
 
     private String descripcion;
+    
+    private boolean disponible;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String descripcion , float peso)
+    public Item(String descripcion , float peso,boolean disponible)
     {
         this.descripcion = descripcion;
+        this.disponible = disponible;
         this.peso = peso;
     }
 
@@ -42,5 +45,12 @@ public class Item
     public String toString()
     {
         return descripcion + "Peso: " + peso+ "kg\n";
+    }
+    /**
+     * Devuelve un valor booleano
+     */
+    public boolean disponible()
+    {
+        return disponible;
     }
 }

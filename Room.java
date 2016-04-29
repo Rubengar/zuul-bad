@@ -18,7 +18,6 @@ public class Room
     private String description;
     private HashMap<String,Room> salidas;
     private ArrayList<Item> objetos;
-    private Item item;
 
     /**
      * Create a room described "description". Initially, it has
@@ -99,19 +98,11 @@ public class Room
         }
         return descripcion;
     }
-
-    /**
-     * Permite añadir un objeto a la habitación
-     */
-    public void addItem(String descripcion,float peso)
-    {
-        objetos.add(item = new Item(descripcion,peso));
-
-    }    
+   
     /**
      * Añade  un objeto pasado por parametro
      */
-    public void addItems(Item item)
+    public void addItem(Item item)
     {
          objetos.add(item);
     }
@@ -127,6 +118,7 @@ public class Room
      */
     public Item getItems(String descripcion)
     {
+        Item objeto = null;
         for (Item item : objetos)
         {
             if (item.getDescripcion().equals(descripcion))
@@ -134,6 +126,6 @@ public class Room
                 return item;
             }
         }
-        return null;
+        return objeto;
     }
 }

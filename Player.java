@@ -16,7 +16,7 @@ public class Player
 
     private Room habitacion;
     
-    public Stack <Room> lista;
+    private Stack <Room> habitaciones;
 
     /**
      * Constructor for objects of class Player
@@ -25,7 +25,7 @@ public class Player
     {
         this.habitacion = habitacion;
         pesoTotal = 0F;
-        lista = new Stack<>();
+        habitaciones = new Stack<>();
         objetos = new ArrayList<>();
     }
 
@@ -34,16 +34,17 @@ public class Player
      */
     public Item takeItem(Item item)
     {
+        Item objeto = null;
         if(pesoTotal < PESO_MAXIMO - item.getPeso())
         {
             objetos.add(item);
             pesoTotal += item.getPeso();
-            return item;
+            objeto = item;
         }else
         {
             System.out.println("No puedes coger mas objetos");
         }
-        return null;
+        return objeto;
     }
 
     /**
@@ -51,6 +52,7 @@ public class Player
      */
     public Item dropItem(Item item)
     {        
+        Item objeto = null;
         if (objetos.isEmpty())
         {
             System.out.println("Ya no tiene objetos");
@@ -58,9 +60,9 @@ public class Player
         {
             pesoTotal -= item.getPeso();
             objetos.remove(item);
-            return item;
+            objeto = item;
         } 
-        return null;
+        return objeto;
     }
 
     /**
@@ -83,14 +85,15 @@ public class Player
      */
     public Item getItem(String descripcion)
     {
+        Item objeto = null;
         for (Item item : objetos)
         {
             if (item.getDescripcion().equals(descripcion))
             {
-                return item;
+                objeto = item;
             }
         }
-        return null;
+        return objeto;
     }
     /**
      * Muestra la descripcion de los objetos que tiene el jugador
@@ -105,5 +108,26 @@ public class Player
                 System.out.print(item);
             }
         }
+    }
+    /**
+     * Añade una habitacion al Stack
+     */
+    public void addRoom(Room room)
+    {
+        habitaciones.push(room);
+    }
+    /**
+     * Elimina la habitacion del Stack y la devuelve
+     */
+    public Room removeRoom()
+    {
+        return habitaciones.pop();
+    }
+    /**
+     * Devuelve true si esta vacio el Stack
+     */
+    public boolean isEmpty()
+    {
+     return habitaciones.isEmpty();
     }
 }
