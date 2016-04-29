@@ -23,10 +23,9 @@ public class CommandWords
     {
         validCommands = new HashMap<>();        
         comando = Option.values();
-        String[] comandos = {"al", "salir", "ayuda", "look", "eat","back","take","drop","items"};
-        for (int i=0;i<comandos.length;i++)
+        for (Option opcion : comando)
         {
-            validCommands.put(comandos[i],comando[i]);
+            validCommands.put(opcion.getComando(),opcion);
         }        
     }
 
