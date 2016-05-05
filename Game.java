@@ -245,7 +245,7 @@ public class Game
      */
     private void returnRoom()
     {
-        if (jugador.isEmpty())
+        if (jugador.puedeVolver())
         {
             System.out.println("Error no puedes volver atras");
         }else
