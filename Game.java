@@ -20,6 +20,7 @@ public class Game
 {
     private Parser parser;
     private Player jugador;
+    private ArrayList<Room> habitaciones;
     /**
      * Create the game and initialise its internal map.
      */
@@ -67,7 +68,10 @@ public class Game
         salida.setExit("oeste",entrada);
         celda.addItem(new Item ("Mesa",12F,true));
         celda.addItem(new Item("Cama",12F,false));
-
+        
+        habitaciones = new ArrayList<>();
+        habitaciones.add(pasillo);
+        
         jugador = new Player(celda);
     }
 
