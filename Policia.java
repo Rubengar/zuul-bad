@@ -13,38 +13,51 @@ public class Policia
     /**
      * Constructor for objects of class Policia
      */
-    public Policia()
+    public Policia(ArrayList<Room> habitaciones1)
     {
-        Room celda, pasillo, otraCelda, comedor, gimnasio, patio, entrada, salida;
-
-        // create the rooms
-        otraCelda = new Room("en otra celda, vaya escapista que esta hecho");
-        comedor = new Room("en el comedor,no te pares a tomar algo que te conozco");
-        pasillo = new Room("en el pasillo, muy bien!!! vamos avanzando");
-        gimnasio = new Room("en el gimnasio ponte a hacer ejercicio que lo necesitas");
-        patio = new Room("en el patio, donde todo el mundo te puede ver y nadie sospechará");
-
-
-        // initialise room exits
-        otraCelda.setExit("sur",pasillo);
-        otraCelda.setExit("sureste",comedor);
-        pasillo.setExit("norte",otraCelda);
-        pasillo.setExit("este",comedor);
-        comedor.setExit("norte",patio);
-        comedor.setExit("este",gimnasio);
-        comedor.setExit("noroeste",otraCelda);
-        comedor.setExit("oeste",pasillo);
-        gimnasio.setExit("oeste",comedor);
-        gimnasio.setExit("noroeste",patio);
-        patio.setExit("sureste",gimnasio);
-        patio.setExit("sur",comedor);
-        //guarda las habitaciones en las que puede estar el policia
-        habitaciones.add(otraCelda);
-        habitaciones.add(comedor);
-        habitaciones.add(pasillo);
-        habitaciones.add(gimnasio);
-        habitaciones.add(patio);
+        habitaciones = new ArrayList<>();
+        this.habitaciones = habitaciones1;
+        //Desordena las habitaciones
         Collections.shuffle(habitaciones);
+        //Seleciona la situacion actual del policia
+        currentRoom = habitaciones.get(0);
+    }
+
+    /**
+     * Devuelve la posición actual del policía
+     */
+    public Room getRoomPolicia()
+    {
+        return currentRoom;        
+    }
+
+    /**
+     * 
+     */
+    public void moverse()
+    {
+        ArrayList<Room> posiblesSalidas = new ArrayList<>();
+        
+        ArrayList<Room> todasLasSalidas = new ArrayList<>();
+        
+        todasLasSalidas.add(currentRoom.getExit("norte"));
+        todasLasSalidas.add(currentRoom.getExit("sur"));
+        todasLasSalidas.add(currentRoom.getExit("este"));
+        todasLasSalidas.add(currentRoom.getExit("oeste"));
+        todasLasSalidas.add(currentRoom.getExit("noroeste"));
+        todasLasSalidas.add(currentRoom.getExit("sureste"));
+
+        for (Room habitacion: todasLasSalidas)
+        {
+            if(habitacion !=null)
+            {
+                posiblesSalidas.add(habitacion);
+            }
+        }
+        
+        Collections.shuffle(posiblesSalidas);
+        currentRoom = posiblesSalidas.get(0);
+
     }
 
 }

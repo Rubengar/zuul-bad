@@ -1,5 +1,6 @@
-1º Que el jugador tenga la posibilidad de crear un objeto a partir de dos o mas objetos que tenga el jugador en posesión.
+1º Que el jugador tenga la posibilidad de crear un objeto a partir de dos o mas objetos que tenga el jugador en posesión
+,el objeto nuevo se añade al jugador y se eliminan los objetos usados para la creacion.
 
-2º Que exista un policía va paseando por las habitaciones y si se encuentra con el jugador, este vuelve a la posición
+2º Que exista un policía va pasando por las habitaciones a la vez que el jugador se mueve y si se encuentra con el jugador, este vuelve a la posición
 donde se inicio el juego quitandole todos los objetos que tenia, pero si el jugador posee un objeto concreto , este puede 
-matar al policia seguir adelante;
+matar al policia y seguir adelante.
