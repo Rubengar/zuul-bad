@@ -15,8 +15,7 @@ public class Policia
      */
     public Policia(ArrayList<Room> habitaciones1)
     {
-        habitaciones = new ArrayList<>();
-        this.habitaciones = habitaciones1;
+        habitaciones = habitaciones1;
         //Desordena las habitaciones
         Collections.shuffle(habitaciones);
         //Seleciona la situacion actual del policia
@@ -32,7 +31,7 @@ public class Policia
     }
 
     /**
-     * 
+     * Metodo que hace que el policia se mueva aleatoriamente
      */
     public void moverse()
     {

@@ -69,7 +69,7 @@ public class Game
         entrada.setExit("oeste",patio);
         salida.setExit("oeste",entrada);
         celda.addItem(new Item ("Mesa",12F,true));
-        celda.addItem(new Item("Cama",12F,false));
+        celda.addItem(new Item("Cama",12F,true));
         
         habitacionesPolicia = new ArrayList<>();
         

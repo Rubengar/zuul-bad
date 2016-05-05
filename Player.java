@@ -134,6 +134,9 @@ public class Player
     {
      return habitaciones.isEmpty();
     }
+    /**
+     * Metodo que elimina los objetos del arraylist
+     */
     public void eliminarObjetos()
     {
         ArrayList<Item> vacio = new ArrayList<>();
