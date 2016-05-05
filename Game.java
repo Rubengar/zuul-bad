@@ -20,6 +20,9 @@ public class Game
 {
     private Parser parser;
     private Player jugador;
+    private Policia policia;
+    private ArrayList<Room> habitacionesPolicia;
+    private Room inicio;
     /**
      * Create the game and initialise its internal map.
      */
@@ -66,9 +69,20 @@ public class Game
         entrada.setExit("oeste",patio);
         salida.setExit("oeste",entrada);
         celda.addItem(new Item ("Mesa",12F,true));
-        celda.addItem(new Item("Cama",12F,false));
-
-        jugador = new Player(celda);
+        celda.addItem(new Item("Cama",12F,true));
+        
+        habitacionesPolicia = new ArrayList<>();
+        
+        habitacionesPolicia.add(otraCelda);
+        habitacionesPolicia.add(comedor);
+        habitacionesPolicia.add(pasillo);
+        habitacionesPolicia.add(gimnasio);
+        habitacionesPolicia.add(patio);
+        
+        inicio = celda;
+        
+        policia = new Policia(habitacionesPolicia);
+        jugador = new Player(inicio);
     }
 
     /**
@@ -186,6 +200,13 @@ public class Game
         else {
             jugador.addRoom(jugador.getPlayerRoom());
             jugador.movePlayer(nextRoom);
+            policia.moverse();
+            if (jugador.getPlayerRoom().getDescription()== policia.getRoomPolicia().getDescription())
+            {
+                System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
+                jugador.setRoom(inicio);
+                jugador.eliminarObjetos();
+            }
             printLocalInfo();
         }
     }

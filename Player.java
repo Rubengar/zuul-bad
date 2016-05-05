@@ -72,6 +72,10 @@ public class Player
     {
         return habitacion;
     }
+    public void setRoom(Room room)
+    {
+        habitacion = room;
+    }
 
     /**
      * Metodo que cambia al jugador de habitacion
@@ -129,5 +133,13 @@ public class Player
     public boolean puedeVolver()
     {
      return habitaciones.isEmpty();
+    }
+    /**
+     * Metodo que elimina los objetos del arraylist
+     */
+    public void eliminarObjetos()
+    {
+        ArrayList<Item> vacio = new ArrayList<>();
+        objetos = vacio;
     }
 }
