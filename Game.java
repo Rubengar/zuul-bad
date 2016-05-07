@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Player jugador;
     private Policia policia;
+    private Craft creador;
     private ArrayList<Room> habitacionesPolicia;
     private Room inicio;
     /**
@@ -38,6 +39,7 @@ public class Game
     private void createRooms()
     {
         Room celda, pasillo, otraCelda, comedor, gimnasio, patio, entrada, salida;
+        creador = new Craft();
 
         // create the rooms
         celda = new Room("en tu celda");
@@ -68,19 +70,20 @@ public class Game
         entrada.setExit("este",salida);
         entrada.setExit("oeste",patio);
         salida.setExit("oeste",entrada);
-        celda.addItem(new Item ("Mesa",12F,true));
-        celda.addItem(new Item("Cama",12F,true));
-        
+        celda.addItem(new Item ("Palo",5F,true));
+        celda.addItem(new Item("Madera",5F,true));
+        celda.addItem(new Item("Metal",5F,true));
+
         habitacionesPolicia = new ArrayList<>();
-        
+
         habitacionesPolicia.add(otraCelda);
         habitacionesPolicia.add(comedor);
         habitacionesPolicia.add(pasillo);
         habitacionesPolicia.add(gimnasio);
         habitacionesPolicia.add(patio);
-        
+
         inicio = celda;
-        
+
         policia = new Policia(habitacionesPolicia);
         jugador = new Player(inicio);
     }
@@ -133,32 +136,35 @@ public class Game
         Option commandWord = command.getCommandWord();
         switch (commandWord) {
             case AYUDA:
-                printHelp();
-                break;
+            printHelp();
+            break;
             case AL:
-                goRoom(command);
-                break;
+            goRoom(command);
+            break;
             case SALIR:
-                wantToQuit = quit(command);
-                break;
+            wantToQuit = quit(command);
+            break;
             case LOOK:
-                System.out.println(jugador.getPlayerRoom().getLongDescription());
-                break;
+            System.out.println(jugador.getPlayerRoom().getLongDescription());
+            break;
             case EAT:
-                System.out.println("You have eaten now and you are not hungry any more");
-                break;
+            System.out.println("You have eaten now and you are not hungry any more");
+            break;
             case BACK:;
-                returnRoom();
-                break;
+            returnRoom();
+            break;
             case TAKE:
-                takeItem(command);
-                break;
+            takeItem(command);
+            break;
             case DROP:
-                dropItem(command);
-                break;
+            dropItem(command);
+            break;
             case ITEMS:
-                jugador.infoItems();
-                break;
+            jugador.infoItems();
+            break;
+            case CRAFT:
+            crearObjeto(command);
+            break;
         }
         return wantToQuit;
     }
@@ -203,12 +209,47 @@ public class Game
             policia.moverse();
             if (jugador.getPlayerRoom().getDescription()== policia.getRoomPolicia().getDescription())
             {
-                System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
-                jugador.setRoom(inicio);
-                jugador.eliminarObjetos();
+                if (jugador.haveItem("cuchillo"))
+                {
+                    muerteDelPolicia();
+                }else
+                {
+                    System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
+                    jugador.setRoom(inicio);
+                    jugador.eliminarObjetos();
+
+                }
             }
             printLocalInfo();
         }
+    }
+    /**
+     * Metodo que elimina al policia de la partida
+     */
+    private void muerteDelPolicia()
+    {
+        System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
+        System.out.println("+ Yo? , a salir de aqui cueste lo que cueste");
+        System.out.println("- Suelta ese cuchillo ahora mismo!!!");
+        System.out.println("-nooooo........!!");
+        System.out.println("+ he dicho cueste lo que cueste..");
+        policia = null;
+        jugador.dropItem(jugador.getItem("cuchillo"));
+        System.out.println("enhorabuena te has librado del policia ahora tienes camino libre");
+
+    }
+    /**
+     * Metodo que crea el objeto que el jugador diga con el comando crear ,si este no viene acompañado
+     * de nunguna palabra,le informacion al jugador de que puede crear
+     */
+    private void crearObjeto(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            creador.puedeCrear(jugador);
+            return;
+        }
+        creador.crearObjeto(command.getSecondWord(),jugador);
     }
 
     /**
