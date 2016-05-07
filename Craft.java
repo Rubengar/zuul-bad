@@ -33,7 +33,8 @@ public class Craft
             {
                 jugador.dropItem(jugador.getItem("Palo"));
                 jugador.dropItem(jugador.getItem("Madera"));
-                jugador.takeItem(objeto1);
+                jugador.takeItem(objeto1);      
+                System.out.println("Creaste un martillo");
             }else
             {
                 System.out.println("Te faltan objetos para la creación");
@@ -41,11 +42,12 @@ public class Craft
         }
         else if(objeto2.getDescripcion().equals(descripcion))
         {
-            if(jugador.haveItem("Palo") && jugador.haveItem("Trozo de metal"))
+            if(jugador.haveItem("Palo") && jugador.haveItem("Metal"))
             {
                 jugador.dropItem(jugador.getItem("Palo"));
-                jugador.dropItem(jugador.getItem("Trozo de metal"));
+                jugador.dropItem(jugador.getItem("Metal"));
                 jugador.takeItem(objeto2);
+                System.out.println("Creaste un cuchillo");
             }else
             {
                 System.out.println("Te faltan objetos para la creación");
@@ -65,7 +67,7 @@ public class Craft
         {
             System.out.println("Si lo desea puedes crear un martillo");
         }
-        else if (jugador.haveItem("Palo")&& jugador.haveItem("Trozo de metal"))
+        else if (jugador.haveItem("Palo")&& jugador.haveItem("Metal"))
         {
             System.out.println("Puedes crear un cuchillo");
         }

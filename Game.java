@@ -72,17 +72,18 @@ public class Game
         salida.setExit("oeste",entrada);
         celda.addItem(new Item ("Palo",5F,true));
         celda.addItem(new Item("Madera",5F,true));
-        
+        celda.addItem(new Item("Metal",5F,true));
+
         habitacionesPolicia = new ArrayList<>();
-        
+
         habitacionesPolicia.add(otraCelda);
         habitacionesPolicia.add(comedor);
         habitacionesPolicia.add(pasillo);
         habitacionesPolicia.add(gimnasio);
         habitacionesPolicia.add(patio);
-        
+
         inicio = celda;
-        
+
         policia = new Policia(habitacionesPolicia);
         jugador = new Player(inicio);
     }
@@ -135,35 +136,35 @@ public class Game
         Option commandWord = command.getCommandWord();
         switch (commandWord) {
             case AYUDA:
-                printHelp();
-                break;
+            printHelp();
+            break;
             case AL:
-                goRoom(command);
-                break;
+            goRoom(command);
+            break;
             case SALIR:
-                wantToQuit = quit(command);
-                break;
+            wantToQuit = quit(command);
+            break;
             case LOOK:
-                System.out.println(jugador.getPlayerRoom().getLongDescription());
-                break;
+            System.out.println(jugador.getPlayerRoom().getLongDescription());
+            break;
             case EAT:
-                System.out.println("You have eaten now and you are not hungry any more");
-                break;
+            System.out.println("You have eaten now and you are not hungry any more");
+            break;
             case BACK:;
-                returnRoom();
-                break;
+            returnRoom();
+            break;
             case TAKE:
-                takeItem(command);
-                break;
+            takeItem(command);
+            break;
             case DROP:
-                dropItem(command);
-                break;
+            dropItem(command);
+            break;
             case ITEMS:
-                jugador.infoItems();
-                break;
+            jugador.infoItems();
+            break;
             case CRAFT:
-                crearObjeto(command);
-                break;
+            crearObjeto(command);
+            break;
         }
         return wantToQuit;
     }
@@ -208,13 +209,29 @@ public class Game
             policia.moverse();
             if (jugador.getPlayerRoom().getDescription()== policia.getRoomPolicia().getDescription())
             {
-                System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
-                jugador.setRoom(inicio);
-                jugador.eliminarObjetos();
+                if (jugador.haveItem("cuchillo"))
+                {
+                    System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
+                    System.out.println("+ Yo? , a salir de aqui cueste lo que cueste");
+                    System.out.println("- Suelta ese cuchillo ahora mismo!!!");
+                    System.out.println("-nooooo........!!");
+                    System.out.println("+ he dicho cueste lo que cueste..");
+                    policia = null;
+                    jugador.dropItem(jugador.getItem("cuchillo"));
+                    System.out.println("enhorabuena te has librado del policia ahora tienes camino libre");
+
+                }else
+                {
+                    System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
+                    jugador.setRoom(inicio);
+                    jugador.eliminarObjetos();
+
+                }
             }
             printLocalInfo();
         }
     }
+
     private void crearObjeto(Command command)
     {
         if(!command.hasSecondWord()) {
@@ -224,6 +241,7 @@ public class Game
         }
         creador.crearObjeto(command.getSecondWord(),jugador);
     }
+
     /**
      * Metodo que añade el item al jugador y lo elimina de la habitacion
      */
