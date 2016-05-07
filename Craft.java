@@ -7,9 +7,8 @@
  */
 public class Craft
 {
-    // instance variables - replace the example below with your own
+    //objetos que puede crear el jugador
     private Item objeto1;
-    
     private Item objeto2;
 
     /**

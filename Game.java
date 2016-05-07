@@ -211,15 +211,7 @@ public class Game
             {
                 if (jugador.haveItem("cuchillo"))
                 {
-                    System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
-                    System.out.println("+ Yo? , a salir de aqui cueste lo que cueste");
-                    System.out.println("- Suelta ese cuchillo ahora mismo!!!");
-                    System.out.println("-nooooo........!!");
-                    System.out.println("+ he dicho cueste lo que cueste..");
-                    policia = null;
-                    jugador.dropItem(jugador.getItem("cuchillo"));
-                    System.out.println("enhorabuena te has librado del policia ahora tienes camino libre");
-
+                    muerteDelPolicia();
                 }else
                 {
                     System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
@@ -231,7 +223,25 @@ public class Game
             printLocalInfo();
         }
     }
+    /**
+     * Metodo que elimina al policia de la partida
+     */
+    private void muerteDelPolicia()
+    {
+        System.out.println("- A donde te crees que vas!!!!,anda pa tu celda");
+        System.out.println("+ Yo? , a salir de aqui cueste lo que cueste");
+        System.out.println("- Suelta ese cuchillo ahora mismo!!!");
+        System.out.println("-nooooo........!!");
+        System.out.println("+ he dicho cueste lo que cueste..");
+        policia = null;
+        jugador.dropItem(jugador.getItem("cuchillo"));
+        System.out.println("enhorabuena te has librado del policia ahora tienes camino libre");
 
+    }
+    /**
+     * Metodo que crea el objeto que el jugador diga con el comando crear ,si este no viene acompañado
+     * de nunguna palabra,le informacion al jugador de que puede crear
+     */
     private void crearObjeto(Command command)
     {
         if(!command.hasSecondWord()) {
