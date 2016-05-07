@@ -16,6 +16,7 @@ public enum Option
     TAKE("take"),
     DROP("drop"), 
     ITEMS("items"),
+    CRAFT("crear"),
     UNKNOWN(null);
     private String comando;
     Option(String comando)

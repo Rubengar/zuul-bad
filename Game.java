@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Player jugador;
     private Policia policia;
+    private Craft creador;
     private ArrayList<Room> habitacionesPolicia;
     private Room inicio;
     /**
@@ -38,6 +39,7 @@ public class Game
     private void createRooms()
     {
         Room celda, pasillo, otraCelda, comedor, gimnasio, patio, entrada, salida;
+        creador = new Craft();
 
         // create the rooms
         celda = new Room("en tu celda");
@@ -68,8 +70,8 @@ public class Game
         entrada.setExit("este",salida);
         entrada.setExit("oeste",patio);
         salida.setExit("oeste",entrada);
-        celda.addItem(new Item ("Mesa",12F,true));
-        celda.addItem(new Item("Cama",12F,true));
+        celda.addItem(new Item ("Palo",5F,true));
+        celda.addItem(new Item("Madera",5F,true));
         
         habitacionesPolicia = new ArrayList<>();
         
@@ -159,6 +161,9 @@ public class Game
             case ITEMS:
                 jugador.infoItems();
                 break;
+            case CRAFT:
+                crearObjeto(command);
+                break;
         }
         return wantToQuit;
     }
@@ -210,7 +215,15 @@ public class Game
             printLocalInfo();
         }
     }
-
+    private void crearObjeto(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            creador.puedeCrear(jugador);
+            return;
+        }
+        creador.crearObjeto(command.getSecondWord(),jugador);
+    }
     /**
      * Metodo que añade el item al jugador y lo elimina de la habitacion
      */

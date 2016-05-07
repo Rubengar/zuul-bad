@@ -142,4 +142,19 @@ public class Player
         ArrayList<Item> vacio = new ArrayList<>();
         objetos = vacio;
     }
+    /**
+     * Comprueba si el jugador tiene un objeto
+     */
+    public boolean haveItem(String descripcion)
+    {
+        boolean existe = false;
+        for (Item item : objetos)
+        {
+            if (item.getDescripcion().equals(descripcion))
+            {
+                existe = true;
+            }
+        }
+        return existe;
+    }
 }
